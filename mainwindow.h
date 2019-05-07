@@ -35,7 +35,7 @@ private:
     QList<std::shared_ptr<FileImportInterface> >_fileImporters;
     QList<std::shared_ptr<ViewerInterface> >_viewers;
     QList<std::shared_ptr<ProjectInterface> >_projectVisitors;
-    QList<std::shared_ptr<DataProviderInterface> > _dataProviders;
+    QList<SpDataProviderInterface > _dataProviders;
 #ifdef QT_SQL
     QList<std::shared_ptr<DatabaseInterface> > _databaseVisitors;
 #endif

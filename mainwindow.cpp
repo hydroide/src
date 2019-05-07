@@ -48,7 +48,7 @@ void MainWindow::loadPlugins()
             }
             auto dataProvider = qobject_cast<DataProviderInterface *>(plugin);
             if (dataProvider) {
-                _dataProviders.push_back(std::shared_ptr<DataProviderInterface>(dataProvider));
+                _dataProviders.push_back(SpDataProviderInterface(dataProvider));
             }
 #ifdef QT_SQL
             auto databaseVisitor = qobject_cast<DatabaseInterface *>(plugin);
