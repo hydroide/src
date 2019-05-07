@@ -46,6 +46,10 @@ void MainWindow::loadPlugins()
             if (projectVisitor) {
                 _projectVisitors.push_back(std::shared_ptr<ProjectInterface>(projectVisitor));
             }
+            auto dataAccessor = qobject_cast<DataAccessorInterface *>(plugin);
+            if (dataAccessor) {
+                _dataAccessors.push_back(SpDataAccessorInterface(dataAccessor));
+            }
             auto dataProvider = qobject_cast<DataProviderInterface *>(plugin);
             if (dataProvider) {
                 _dataProviders.push_back(SpDataProviderInterface(dataProvider));
@@ -74,17 +78,15 @@ void MainWindow::on_pushButton_clicked()
         for (auto visitor : _databaseVisitors) {
             visitor->setDatabase(db);
         }
-        auto project = std::make_shared<Project>("");
 
         for (auto provider: _dataProviders) {
             if (provider->type() == QString("sqlite")) {
-                project->setDataProvider(provider);
+                for (auto accessor: _dataAccessors) {
+                    accessor->setDataProvider(provider);
+                }
             }
         }
 
-        for (auto visitor : _projectVisitors) {
-            visitor->setProject(project);
-        }
         for (auto viewer : _viewers) {
             ui->tabWidget->addTab(new ViewerWindow(viewer->create(nullptr), this), viewer->name() + " - " + filePath);
         }

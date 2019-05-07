@@ -8,6 +8,7 @@
 #include "interfaces/fileimportinterface.h"
 #include "interfaces/viewerinterface.h"
 #include "interfaces/projectinterface.h"
+#include "interfaces/dataaccessorinterface.h"
 #include "interfaces/dataproviderinterface.h"
 
 #ifdef QT_SQL
@@ -35,7 +36,8 @@ private:
     QList<std::shared_ptr<FileImportInterface> >_fileImporters;
     QList<std::shared_ptr<ViewerInterface> >_viewers;
     QList<std::shared_ptr<ProjectInterface> >_projectVisitors;
-    QList<SpDataProviderInterface > _dataProviders;
+    QList<SpDataAccessorInterface> _dataAccessors;
+    QList<SpDataProviderInterface> _dataProviders;
 #ifdef QT_SQL
     QList<std::shared_ptr<DatabaseInterface> > _databaseVisitors;
 #endif
