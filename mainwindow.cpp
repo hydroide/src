@@ -77,7 +77,7 @@ void MainWindow::on_pushButton_clicked()
         auto project = std::make_shared<Project>("");
 
         for (auto provider: _dataProviders) {
-            if (provider->type() == QString("database")) {
+            if (provider->type() == QString("sqlite")) {
                 project->setDataProvider(provider);
             }
         }
