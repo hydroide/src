@@ -28,7 +28,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    bool closeTab(const int& index);
+
+    void on_actionOpen_triggered();
+
+    void on_actionCreate_triggered();
+
+    void on_actionImport_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -39,10 +45,11 @@ private:
     QList<SpDataAccessorInterface> _dataAccessors;
     QList<SpDataProviderInterface> _dataProviders;
 #ifdef QT_SQL
-    QList<std::shared_ptr<DatabaseInterface> > _databaseVisitors;
+    QList<std::shared_ptr<DatabaseInterface> > _databasePlugins;
 #endif
 
     void loadPlugins();
+    void loadViewers();
 };
 
 #endif // MAINWINDOW_H
